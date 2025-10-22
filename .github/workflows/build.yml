@@ -1,12 +1,7 @@
-name: Build Astro Site
+name: CI on repository_dispatch
 
-# This action triggers on push or pull request to the 'main' branch
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
+  repository_dispatch:
 
 jobs:
   build:
