@@ -1,0 +1,37 @@
+name: Build Astro Site
+
+# This action triggers on push or pull request to the 'main' branch
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    # Use the latest Ubuntu runner
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out your repository's code
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js (Astro requires v18 or newer)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm' # Cache npm packages for faster builds
+
+      # 3. Install all project dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Run the 'astro build' command
+      - name: Build site
+        run: npm run build
+      
+      # 5. Optional: You could add a step here to deploy the 'dist' folder
+      #    to GitHub Pages, Netlify, Vercel, etc.
